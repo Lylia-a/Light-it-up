@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome library -->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+    <!-- My Framework CSS File -->
+    <link rel="stylesheet" href="{% static 'css/framework.css' %}" />
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static 'css/master.css' %}" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+    <link href="{% static 'css/counter.css' %}" rel="stylesheet">
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="{% static 'css/pagination.css' %}" rel="stylesheet">  
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <title>Events Page</title>
+  <style>
+  
+    .unstyled-list {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    svg{
+      margin-bottom: 5px;
+      margin-right: 3px;
+    }
+
+  .sidebar{
+    text-decoration: none;
+  }
+
+  .globe{
+  color: black;
+  &:hover{
+    color: #AE9775;
+  }
+  }
+  
+  #descEvent {
+      max-width: 200px; /* ajustez la largeur maximale selon vos besoins */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      float: left; /* Ajout de float: left pour aligner le texte à gauche */
+    }
+ 
+    .clear {
+      clear: both;
+    }
+
+    #showMoreBtn {
+   cursor: pointer;
+   color: #A9AFB8;
+   text-decoration: none;
+}
+
+.description-truncated {
+   max-width: 200px; /* ajustez la largeur maximale selon vos besoins */
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   float: left;
+}
+
+#modifyForm input::placeholder {
+    color: #808080; /* Remplacez cette couleur par celle que vous souhaitez utiliser */
+}
+
+#modifyForm textarea::placeholder {
+    color: #808080; /* Remplacez cette couleur par celle que vous souhaitez utiliser pour les champs de texte multiligne */
+}
+
+#modifyForm input{
+    margin: 10px;
+}
+
+.modification-form {
+            display: none;
+        }
+
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+  <div class="page d-flex">
+    <!-- Start Sidebar -->
+    <div class="sidebar bg-white p-20 p-relative">
+     <h3 class="p-relative mt-0 txt-c"><img src="{% static 'img/logonoir.png' %}" style="width: 150px; height: 50px;"></h3>
+     <ul>
+      <li>
+        <a class="d-flex align-center fs-14 c-black radius-6 p-10" href="/dashboard/">
+          <i class="bi bi-house"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a class=" active d-flex align-center fs-14 c-black radius-6 p-10" href="/dashboard/events/">
+          <i class="bi bi-balloon"></i>
+            <span>Events</span>
+          </a>
+        </li>
+        <li>
+          <a class=" d-flex align-center fs-14 c-black radius-6 p-10" href="/dashboard/members/">
+            <i class="bi bi-people"></i>
+            <span>Members</span>
+        </a>
+      </li>
+      <li>
+        <a class="d-flex align-center fs-14 c-black radius-6 p-10" href="/dashboard/appointments/">
+          <i class="bi bi-calendar4-event"></i>
+          <span>Appointments</span>
+        </a>
+      </li>
+      <li>
+        <a class="d-flex align-center fs-14 c-black radius-6 p-10" href="/home/">
+          <i class="bi bi-cake"></i>
+          <span>Website</span>
+        </a>
+      </li>
+      <li>
+        <a class="d-flex align-center fs-14 c-black radius-6 p-10" href="/login/" id="logoutLink">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Log Out</span>
+        </a>
+    </li>
+    </ul>
+    </div>
+    <!-- End Sidebar -->
+    <div class="content w-full hidden">
+      <!-- Start Head -->
+      <div class="head p-15 between-flex bg-white">
+        <div class="search p-relative">
+          <input type="search" placeholder="Type A Keyword" class="p-10" ></input>
+        </div>
+        <div class="icons d-flex align-center">
+        
+        
+           <span class="notification p-relative" style="margin-right: 30px;">
+            <i class="bi bi-bell"></i>
+          </span> 
+          
+        </div>
+      </div>
+      <!-- End Head -->
+      <h1 class="p-relative">Admin</h1>
+      <!--Debut de la grille des evenements-->
+      <div class="plans-page d-grid m-20 gap-20">
+        <!--Evenement 1-->
+        {% if nexteventbabyshower %}
+        <div class="plan green bg-white p-20"> 
+            <div class="box p-20 "> 
+                <h2 class="mt-0 mb-10">Upcoming event</h2>
+                <footer class="mt-0 mb-20 c-grey fs-15" style="color: #AE9775; margin-right: 210px;">
+                    in {{nexteventbabyshower.9}} days
+                </footer>
+                <div class="box fs-13 c-grey">
+                    <img class="photoEvent imgevent1" src="{% static 'img/prochainevent.png' %}" style="width: 40%; height: 50%; object-fit: cover; margin-left: 250px;"/>
+                </div>
+                <ul class="unstyled-list" style="margin-top: -170px;">
+                    <li class="eventName"><b>{{nexteventbirthday.1}}</b></li>
+                    <li class="placeEvent"><i class="bi bi-geo-alt" style="color: #000;"></i><b> Team:</b> {{nexteventbabyshower.7}}</li>
+                    <li class="dateEvent"><i class="bi bi-calendar" style="color:#000;"></i><b> Date:</b> {{nexteventbabyshower.3}}</li>
+                    <li class="hourEvent"> <i class="bi bi-clock" style="color: #000;"></i><b> Time:</b> A partir de {{nexteventbabyshower.4}}</li>
+                </ul>
+                <a href=""><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Delete</button></a>
+                <a href="#modification" ><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Modify</button></a>
+            </div>
+        </div>
+    {% else %}
+        <div class="plan green bg-white p-20"> 
+            <div class="box p-20 "> 
+                <h2 class="mt-0 mb-10">No upcoming events</h2>
+                <div class="box fs-13 c-grey"></div>
+                <ul class="unstyled-list" style="margin-top: 0px;">
+                    <li class="typeEvent"><b>Baby Shower Team</b></li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    
+      <!--Evenement 2-->
+      {% if nexteventbirthdays %}
+      <div class="plan green bg-white p-20"> 
+        <div class="box p-20 "> 
+          
+      <h2 class="mt-0 mb-10">Upcoming event</h2>
+      <footer class="mt-0 mb-20 c-grey fs-15" style="color: #AE9775; margin-right: 210px;">
+        in {{nexteventbirthdays.9}} days
+      </footer>
+      <div class="box fs-13 c-grey">
+          <img class="photoEvent imgevent1" src="{% static 'img/prochainevent.png' %}" style="width: 40%; height: 50%; object-fit: cover; margin-left: 250px;"/>
+        </div>
+      <ul class="unstyled-list" style="margin-top: -170px;">
+  <li class="eventName"><b>{{nexteventbirthdays.1}}</b></li>
+  <li class="placeEvent"><i class="bi bi-geo-alt" style="color: #000;"></i><b> Team:</b> {{nexteventbirthdays.7}}</li>
+  <li class="dateEvent"><i class="bi bi-calendar" style="color:#000;"></i><b> Date:</b> {{nexteventbirthdays.3}}</li>
+  <li class="hourEvent"> <i class="bi bi-clock" style="color: #000;"></i><b> Time:</b> A partir de {{nexteventbirthdays.4}}</li>
+</ul>
+      <a href="#modification"><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Delete</button></a>
+      <a href="#modification" ><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Modify</button></a>
+        </div>
+    </div>
+    {% else %}
+        <div class="plan green bg-white p-20"> 
+            <div class="box p-20 "> 
+                <h2 class="mt-0 mb-10">No upcoming events</h2>
+                <div class="box fs-13 c-grey"></div>
+                <ul class="unstyled-list" style="margin-top: 0px;">
+                    <li class="typeEvent"><b>Birthday Team</b></li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    <!--Evenement 3-->
+    {% if nexteventgraduation %}
+    <div class="plan green bg-white p-20"> 
+        <div class="box p-20 "> 
+      <h2 class="mt-0 mb-10">Upcoming event</h2>
+      <footer class="mt-0 mb-20 c-grey fs-15" style="color: #AE9775; margin-right: 210px;">
+        in {{nexteventgraduation.9}} days
+      </footer>
+      <div class="box fs-13 c-grey">
+          <img class="photoEvent imgevent1" src="{% static 'img/prochainevent.png' %}" style="width: 40%; height: 50%; object-fit: cover; margin-left: 250px;"/>
+        </div>
+        <ul class="unstyled-list" style="margin-top: -170px;">
+            <li class="eventName"><b>{{nexteventgraduation.1}}</b></li>
+            <li class="placeEvent"><i class="bi bi-geo-alt" style="color: #000;"></i><b> Team:</b> {{nexteventgraduation.7}}</li>
+            <li class="dateEvent"><i class="bi bi-calendar" style="color:#000;"></i><b> Date:</b> {{nexteventgraduation.3}}</li>
+            <li class="hourEvent"> <i class="bi bi-clock" style="color: #000;"></i><b> Time:</b> A partir de {{nexteventgraduation.4}}</li>
+          </ul>
+      <a href="#modification"><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Delete</button></a>
+      <a href="#modification" ><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Modify</button></a>
+        </div>
+    </div>
+    {% else %}
+    <div class="plan green bg-white p-20"> 
+        <div class="box p-20 "> 
+            <h2 class="mt-0 mb-10">No upcoming events</h2>
+            <div class="box fs-13 c-grey"></div>
+            <ul class="unstyled-list" style="margin-top: 0px;">
+                <li class="typeEvent"><b>Graduation Team</b></li>
+            </ul>
+        </div>
+    </div>
+{% endif %}
+
+
+<!--Evenement 4-->
+{% if nexteventwedding %}
+    <div class="plan green bg-white p-20"> 
+        <div class="box p-20 "> 
+      <h2 class="mt-0 mb-10">Upcoming Event</h2>
+      <footer class="mt-0 mb-20 c-grey fs-15" style="color: #AE9775; margin-right: 210px;">
+        in {{nexteventwedding.9}} days
+      </footer>
+      <div class="box fs-13 c-grey">
+          <img class="photoEvent imgevent1" src="{% static 'img/prochainevent.png' %}" style="width: 40%; height: 50%; object-fit: cover; margin-left: 250px;"/>
+        </div>
+      <ul class="unstyled-list" style="margin-top: -170px;">
+  <li class="eventName"><b>{{nexteventwedding.1}}</b></li>
+  <li class="placeEvent"><i class="bi bi-geo-alt" style="color: #000;"></i><b> Team:</b> {{nexteventwedding.7}}</li>
+  <li class="dateEvent"><i class="bi bi-calendar" style="color:#000;"></i><b> Date:</b> {{nexteventwedding.3}}</li>
+  <li class="hourEvent"> <i class="bi bi-clock" style="color: #000;"></i><b> Time:</b> starts from {{nexteventwedding.4}}</li>
+</ul>
+      <button class="btn custom-btn-beige text-blanc" style="width: 150px;">Delete</button>
+      <a href="#modification" ><button class="btn custom-btn-beige text-blanc" style="width: 150px;">Modify</button></a>
+        </div>
+    </div>
+    {% else %}
+    <div class="plan green bg-white p-20"> 
+        <div class="box p-20 "> 
+            <h2 class="mt-0 mb-10">No upcoming events</h2>
+            <div class="box fs-13 c-grey"></div>
+            <ul class="unstyled-list" style="margin-top: 0px;">
+                <li class="typeEvent"><b>Wedding Team</b></li>
+            </ul>
+        </div>
+    </div>
+{% endif %}
+    
+    <div id="modificationForm1" class="modification-form">
+        <!-- Your modification form fields go here -->
+        <form>
+            Photo Event: <input type="file" name="photoEvent"><br>
+            Date Event: <input type="date" name="dateEvent"><br>
+            Hour Event: <input type="text" name="hourEvent"><br>
+            Name Event: <input type="text" name="nameEvent"><br>
+            Type Event: <input type="text" name="typeEvent"><br>
+            <button type="button" onclick="saveModification(1)">Save</button>
+        </form>
+    </div>
+    
+    <!-- Modification Form for Event 2 -->
+    <div id="modificationForm2" class="modification-form">
+        <!-- Your modification form fields go here -->
+        <form>
+            Photo Event: <input type="file" name="photoEvent"><br>
+            Date Event: <input type="date" name="dateEvent"><br>
+            Hour Event: <input type="text" name="hourEvent"><br>
+            Name Event: <input type="text" name="nameEvent"><br>
+            Type Event: <input type="text" name="typeEvent"><br>
+            <button type="button" onclick="saveModification(2)">Save</button>
+        </form>
+    </div>
+
+    <div id="modificationForm3" class="modification-form">
+        <!-- Your modification form fields go here -->
+        <form>
+            Photo Event: <input type="file" name="photoEvent"><br>
+            Date Event: <input type="date" name="dateEvent"><br>
+            Hour Event: <input type="text" name="hourEvent"><br>
+            Name Event: <input type="text" name="nameEvent"><br>
+            Type Event: <input type="text" name="typeEvent"><br>
+            <button type="button" onclick="saveModification(3)">Save</button>
+        </form>
+    </div>
+
+    <div id="modificationForm4" class="modification-form">
+        <!-- Your modification form fields go here -->
+        <form>
+            Photo Event: <input type="file" name="photoEvent"><br>
+            Date Event: <input type="date" name="dateEvent"><br>
+            Hour Event: <input type="text" name="hourEvent"><br>
+            Name Event: <input type="text" name="nameEvent"><br>
+            Type Event: <input type="text" name="typeEvent"><br>
+            <button type="button" onclick="saveModification(4)">Save</button>
+        </form>
+    </div>
+
+    
+      </div>
+       <!-- Start Project Table -->
+       <div id="modification" class="projects widget-style m-20">
+        <h2 class="mt-0 mb-20">Events</h2>
+        <div >
+          <table class="fs-15 w-full">
+              <tbody>
+                  <tr class="attributesEvent">
+    <td class="eventName">Name</td>
+    
+    
+    <td class="dateEvent">Date</td>
+    <td class="hourEvent">Time</td>
+    <td class="placeEvent">Countdown</td>
+    <td class="typeEvent">Type</td>
+    <td >
+      
+      <span class="descEvent description-truncated">
+        Description of the event.
+      </span>
+    </td>
+    <td id="photoEvent">  Photo </td>
+   
+    <td class="options">
+    Option
+  </td>
+  </tr>
+  
+  {% for event in data %}
+  
+    <tr class="attributesEvent">
+    <td class="eventName">{{event.1}}</td>
+    
+  
+    <td class="dateEvent">{{event.3}}</td>
+    <td class="hourEvent">{{event.4}}</td>
+    <td class="placeEvent">{{event.9}} days left</td>
+    <td class="typeEvent">{{event.7}}</td>
+    <td>
+      <span class="descEvent description-truncated">
+       {{event.2}}
+      </span>
+    </td>
+    <td id="photoEvent">  <img src="{% static 'img/prochainevent.png' %}" alt=""> </td>
+    <td class="options">
+      <span class="popup-btn" style="display: flex; align-items: center;">
+        <i class="bi bi-pencil" style="margin-right: 5px;" onclick="modifyRow(this)"></i>
+    
+        <form method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="id_event" value="{{ event.0 }}">
+            <button type="submit" name="supprimer" class="modifemp" style="background-color: transparent; border: none; padding: 0; cursor: pointer;">
+                <i class="bi bi-trash3" style="margin-left: 5px;"></i>
+            </button>
+        </form>
+    </span>
+    
+    
+    <div class="overlay"></div>
+  </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+          </table>
+        </div>
+        <div class="demo">
+          <nav class="pagination-outer" aria-label="Page navigation">
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li class="page-item">
+                        <a href="?page=1" class="page-link pagination-link" aria-label="First">
+                            <span aria-hidden="true">««</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ data.previous_page_number }}" class="page-link pagination-link" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                {% endif %}
+    
+                {% for num in data.paginator.page_range %}
+                    <li class="page-item{% if data.number == num %} active{% endif %}">
+                        <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    </li>
+                {% endfor %}
+    
+                {% if data.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ data.next_page_number }}" class="page-link pagination-link" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ data.paginator.num_pages }}" class="page-link pagination-link" aria-label="Last">
+                            <span aria-hidden="true">»»</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div id="modifyForm" style="display: none;">
+      <h3>Edit the event</h3>
+      <form method="POST" action=""  onsubmit="submitModifyForm(); return false;">
+          {% csrf_token %}
+          <input type="text" id="modifyEventName" name="modifyEventName" placeholder="Event's Name">
+          <input type="text" id="modifyTypeEvent" name="modifyTypeEvent" placeholder="Event's Type">
+          <input type="text" id="modifyDescEvent" name="modifyDescEvent" placeholder="Event's description">
+          <input type="hidden" id="modifyEventId" name="id_event" value="">
+          <input type="date" id="modifyDateEvent" name="modifyDateEvent" placeholder="Event's Date ">
+          <input type="text" id="modifyHourEvent" name="modifyHourEvent" placeholder="Event's Hour">
+          <input type="file" id="modifyPhotoEvent" name="modifyPhotoEvent" accept="image/*">
+          <button type="submit" name="modif">Edit</button>
+      </form>
+  </div>
+    </div>
+    <!-- End Project Table -->
+    
+    </div>
+  </div>
+
+
+<!--Fonctions JavaScript-->
+
+<!--Fonctions JavaScript-->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+
+<script>
+    var currentRow; // Stocker la ligne actuelle pour la modification
+    function modifyRow(icon) {
+    // Trouver la ligne parente de l'icône
+    currentRow = icon.closest('.attributesEvent');
+
+    // Récupérer l'ID de l'événement
+    var eventId = currentRow.querySelector('[name="id_event"]').value;
+
+    // Mettre à jour l'ID caché in le formulaire de modification
+    document.getElementById('modifyEventId').value = eventId;
+
+    // Récupérer les données de la ligne
+    var eventName = currentRow.querySelector('.eventName').textContent;
+    var typeEvent = currentRow.querySelector('.typeEvent').textContent;
+    var descEvent = currentRow.querySelector('.descEvent').textContent;
+    var dateEvent = currentRow.querySelector('.dateEvent').textContent;
+    var hourEvent = currentRow.querySelector('.hourEvent').textContent;
+
+    // Ajoutez d'autres variables selon vos besoins
+
+    // Remplir le formulaire de modification avec les données actuelles
+    document.getElementById('modifyEventName').value = eventName;
+    document.getElementById('modifyTypeEvent').value = typeEvent;
+    document.getElementById('modifyDescEvent').value = descEvent;
+    document.getElementById('modifyDateEvent').value = dateEvent;
+    document.getElementById('modifyHourEvent').value = hourEvent;
+
+    // Afficher le formulaire de modification
+    document.getElementById('modifyForm').style.display = 'block';
+}
+    function deleteRow(icon) {
+        // Trouver la ligne parente de l'icône
+        var row = icon.closest('.attributesEvent');
+
+        // Supprimer la ligne du tableau
+        if (row) {
+            row.parentNode.removeChild(row);
+            //updatePagination(); // N'oubliez pas d'ajuster la fonction de pagination si nécessaire
+        }
+    }
+
+    function submitModifyForm() {
+        // Récupérer les valeurs modifiées depuis le formulaire
+        var modifiedEventName = document.getElementById('modifyEventName').value;
+        var modifiedTypeEvent = document.getElementById('modifyTypeEvent').value;
+        var modifiedDescEvent = document.getElementById('modifyDescEvent').value;
+        var modifiedDateEvent = document.getElementById('modifyDateEvent').value;
+        var modifiedHourEvent = document.getElementById('modifyHourEvent').value;
+        var modifiedPhotoEvent = document.getElementById('previewPhoto').src;
+        // Récupérez d'autres valeurs selon vos besoins
+
+        // Mettez à jour la ligne avec les nouvelles valeurs
+        currentRow.querySelector('.eventName').textContent = modifiedEventName;
+        currentRow.querySelector('.typeEvent').textContent = modifiedTypeEvent;
+        currentRow.querySelector('.descEvent').textContent = modifiedDescEvent;
+        currentRow.querySelector('.dateEvent').textContent = modifiedDateEvent;
+        currentRow.querySelector('.hourEvent').textContent = modifiedHourEvent;
+        currentRow.querySelector('#photoEvent img').src = modifiedPhotoEvent;
+        // Mettez à jour d'autres éléments selon vos besoins
+
+        // Cacher le formulaire de modification
+        document.getElementById('modifyForm').style.display = 'none';
+    }
+
+    function previewPhoto() {
+        // Afficher l'aperçu de la photo sélectionnée
+        var input = document.getElementById('modifyPhotoEvent');
+        var preview = document.getElementById('previewPhoto');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+
+    // Ajouter un événement de déconnexion en dehors de la fonction addEmployeeBtn.addEventListener
+    var logoutLink = document.getElementById('logoutLink');
+        logoutLink.addEventListener('click', function () {
+            // Effectuez les actions de déconnexion ici, par exemple, redirigez vers la page de connexion
+            window.location.href = '/login/'; // Remplacez 'login.html' par l'URL de votre page de connexion réelle
+            alert('Vous êtes déconnecté !');
+        });
+    
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var descTruncated = document.querySelectorAll('.descEvent.description-truncated');
+
+        descTruncated.forEach(function (desc) {
+            desc.addEventListener('click', function () {
+                // Basculer entre les classes pour afficher ou masquer le texte complet
+                desc.classList.toggle('description-truncated');
+                desc.classList.toggle('description-full');
+            });
+        });
+    });
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        var modificationForms = document.querySelectorAll(".modification-form");
+        for (var i = 0; i < modificationForms.length; i++) {
+            modificationForms[i].style.display = "none";
+        }
+    });
+    function toggleModificationForm(eventNumber) {
+        var modificationForm = document.getElementById("modificationForm" + eventNumber);
+        modificationForm.style.display = (modificationForm.style.display === "none") ? "block" : "none";
+
+        // Masquer les autres formulaires de modification lorsqu'un formulaire est affiché
+        var modificationForms = document.querySelectorAll(".modification-form");
+        for (var i = 0; i < modificationForms.length; i++) {
+            if (modificationForms[i].id !== "modificationForm" + eventNumber) {
+                modificationForms[i].style.display = "none";
+            }
+        }
+    }
+
+
+    function saveModification(eventNumber) {
+        var modificationForm = document.getElementById("modificationForm" + eventNumber);
+
+        // Récupérez les valeurs des nouveaux champs
+        var photoEvent = modificationForm.querySelector('input[name="photoEvent"]').files[0];
+        var dateEvent = modificationForm.querySelector('input[name="dateEvent"]').value;
+        var hourEvent = modificationForm.querySelector('input[name="hourEvent"]').value;
+        var nameEvent = modificationForm.querySelector('input[name="nameEvent"]').value;
+        var typeEvent = modificationForm.querySelector('input[name="typeEvent"]').value;
+
+        // Vous pouvez maintenant utiliser ces valeurs comme vous le souhaitez
+        console.log("Photo Event: ", photoEvent);
+        console.log("Date Event: ", dateEvent);
+        console.log("Hour Event: ", hourEvent);
+        console.log("Name Event: ", nameEvent);
+        console.log("Type Event: ", typeEvent);
+
+        // Implémentez ici la logique pour enregistrer les modifications, y compris le traitement du fichier image côté serveur si nécessaire
+
+        // Enfin, masquez le formulaire de modification
+        modificationForm.style.display = "none";
+    }
+
+</script>
+
+</body>
+
+</html>

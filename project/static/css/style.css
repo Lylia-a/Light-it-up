@@ -1,0 +1,242 @@
+.navbar {
+    position: absolute;
+    width: 100%;
+    z-index: 1000; /* Adjust the z-index to make sure the navbar is on top */
+}
+  
+
+  .img-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img-fluid {
+    width: 100%;
+    height: auto;
+  } 
+  .login-button{
+    background-color:none;
+    color: white;
+    font-size: 14px ;
+    padding:8px 20px ;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s background-color;
+}
+
+.login-button:hover{
+    background-color: #AE9775;
+}
+.navbar-toggler{
+    border: none;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,.btn-close:focus{
+    box-shadow: none;
+    outline: none;
+}
+
+.nav-link{
+    color: white;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover,.nav-link.active{
+    color: #AE9775;
+}
+
+.nav-item:hover,nav-item.active{
+    color:#AE9775;
+}
+
+.nav-link::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #AE9775;
+    visibility: hidden;
+}
+ 
+.navbar-brand{
+    justify-content: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.liste{
+
+ display: inline-flex;
+align-items: flex-start;
+gap: 10px;
+padding-left: 150px;
+}
+
+.custom-margin-left {
+    margin-right: 50px; /* Ajustez la valeur selon vos besoins */
+}
+
+.text-beige{
+     color: #AE9775;;
+}
+
+.text-blanc{
+    color: white;
+}
+
+ul{
+    font-family:'Open Sans',sans-serif; 
+    font-size: small;   
+}
+
+b { 
+    font-family:'Open Sans',sans-serif; 
+    font-weight:800; 
+    font-size: larger;
+    } 
+
+.lead{
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 400;
+    font-size: small;
+}
+
+.custom-btn-transparent {
+    background-color: transparent; /* Fond transparent */
+    width: 200px;
+height: 50px;
+margin: 10px;
+margin-top: 50px;
+border: 2px solid #FFF;
+align-items: center;
+  }
+
+.custom-btn-transparent1{
+    background-color:#AE977566; /* Fond transparent */
+    width: 200px;
+height: 50px;
+margin: 10px;
+margin-top: 50px;
+border: 2px solid #FFF;
+align-items: center;
+  }
+
+.boutonsacc{
+    display: inline-flex;
+align-items: flex-start;
+gap: 30px;
+}
+  
+.custom-btn-transparent:hover,.custom-btn-transparent1:hover{
+    background-color: #AE9775;
+    color: beige;
+}
+
+.text-noir{
+    color: black;
+}
+
+b.text-beige,b.text-noir{
+text-align: center;
+font-family: 'Open Sans',sans-serif;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.text2{
+    margin: 50px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.accueil2{
+    width: 200px;
+height: 300px;
+}
+
+.container-fluid-acc2{
+   padding-top: 40px;
+    margin: 30px;
+}
+
+.flechenoire{
+    width: 30px;
+height: 30px;
+}
+
+.custom-btn-transparent-noir{
+    background-color: transparent; /* Fond transparent */
+    width: 200px;
+height: 50px;
+margin-right: 20px;
+
+border: 2px solid black;
+align-items: center;
+}
+
+.custom-btn-transparent-noir:hover{
+    background-color: #AE9775;
+    color: black;
+}
+
+.accueil3{
+    width: 400px;
+    height: 500px;
+}
+.ms-auto-3 {
+    margin-top: -150px;
+    margin-left: 130px; /* Ajuste la marge négative pour pousser vers le haut */
+  }
+
+
+.ligne1{
+   margin-top: 50px;
+  align-items: center;
+ 
+}
+
+.a{
+   margin: 20px;
+}
+
+.custom-btn-noir{
+    background-color: black; /* Fond transparent */
+    width: 200px;
+height: 50px;
+margin-right: 20px;
+margin-top: 20px;
+border: 2px solid black;
+align-items: center;
+}
+
+.custom-btn-beige{
+    background-color: #AE9775; /* Fond transparent */
+    width: 300px;
+    height: 48px;
+margin-right: 20px;
+margin-top: 20px;
+border-radius: 0%;
+border: 2px solid #AE9775;
+text-align: center;
+justify-content: center;
+}
+
+.custom-btn-beige:hover{
+    background-color: #FFF;
+    color: #AE9775;
+}
+
+a.forgotpassword{
+   margin-right: 200px;
+}
+
+a.forgotpassword:hover{
+    color: #AE9775;
+}

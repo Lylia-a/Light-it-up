@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,400,400i,600,800" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>Employee</title>
+    <style>
+        .img-fluid-accueil{
+    width: 100%;
+     height: 400px;
+     object-fit: cover;
+    }
+
+.container {
+    display: flex;
+    align-items: stretch;
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative; /* Permet un positionnement relatif pour les éléments enfants */
+    border: 2px solid #AE9775;
+box-shadow: 1px 1px 17px 0px #AE9775;
+}
+
+.card1 {
+    flex: 1;
+}
+
+.card2 {
+    flex: 2;
+}
+
+.image-container {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    max-width: 300px; /* Ajustez la largeur maximale de l'image selon vos besoins */
+    max-height:200px; /* Ajustez la hauteur maximale de l'image selon vos besoins */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Assure un ajustement de l'image tout en préservant son ratio */
+}
+
+.text-SemiBold{
+color: var(--gray-900, #111928);
+font-family: 'Open Sans',sans-serif;
+font-size: 15px;
+font-weight: 600;
+line-height: 49.5px;
+text-align: center;
+}
+
+
+.text-right{
+    text-align: left;
+    margin-left: -80px;
+  }
+
+  .btn-primary-custom-beige{
+    background-color: #AE9775;
+    border: 2px solid #AE9775;
+text-align: center;
+justify-content: center;
+}
+
+.btn-primary-custom-beige:hover{
+background-color:#fff;
+color:#AE9775;
+}
+
+.edit-form {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .edit-form input,
+        .edit-form button {
+            margin: 5px;
+        }
+
+.text-right1{
+    margin-left: 20px;
+}   
+
+.break-word {
+            max-width: 300px; /* Ajustez la largeur maximale en pixels selon vos besoins */
+            word-wrap: break-word;
+        }
+.Photo_emp{
+    border:1px solid #AE9775;
+}
+table {
+margin-left: -30px;
+        border-collapse: separate;
+        border-spacing: 30px 5px; /* 10px entre les colonnes, 5px entre les lignes */
+}
+tr{
+    border: 1px solid #AE9775;
+}
+
+
+  
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid" >
+        <a class="navbar-brand me-auto" href="#"> <img src="{% static 'img//logo.png' %}" alt="Logo" width="160" height="60" class="float-start" >
+          </a>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="{% static 'img//logo.svg' %}" alt="Logo" width="160" height="60" class="float-start" ></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav flex-grow-1 pe-3 liste">
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="/home/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/projects/">Projects </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/howitworks/">How it works </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="/login/">Logout </a>
+                  </li>
+              </ul>
+            </div>
+          </div>
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 custom-margin-left">
+            <li class="nav-item">
+          <a href="login.html" class="nav-link"><img src="{% static 'img/contact icon.svg' %}" width="27px" height="27px" ></a>
+          </li>
+          
+            <li class="nav-item">
+                <a href="#" class="nav-link"><img src="{% static  'img/search icon.svg' %}" width="31px" height="31px"></a>
+                </li>
+         </ul>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="position-relative">
+        <div class="jumbotron text-center position-absolute top-50 start-50 translate-middle custom-jumbotron">
+            <p class="display-5  text-blanc "><b>My Account</b></p> 
+       
+        </div>
+        <img src="{% static 'img//accueil1.png' %}" class="img-fluid-accueil" alt="Accueil Image">
+      </div>
+
+    <div class="container">
+        <div class="card card1">
+            <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{% static 'img//avatar.png' %}" alt="User" class="rounded-circle Photo_emp" width="150">
+                    <div class="mt-3">
+                        <h4 class="text-beige">{{name}}</h4>
+                        <div class="team_emp" id="Team_emp" style="font-size: 10px;"><b>{{team}} Team</b></div>
+                        <div class="text-right">
+                            <span class="text-SemiBold">Email:</span> <div class="Email_emp" id="Email_emp" style="margin-bottom: 10px;display: inline-block;"> {{email}}</div>
+                       </div>
+                       <div class="text-right">
+                            <span class="text-SemiBold">Phone:</span>  <div class="Phone_emp" id="Phone_emp" style="margin-top: -25px;display: inline-block;"> {{phone}}</div>
+                        </div>
+                        <button class="btn btn-primary-custom-beige text-blanc" id="editButton">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit Form -->
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="edit-form">
+                   
+                    <label for="newPhone">New Phone:</label>
+                    <input type="text" name="newPhone" id="newPhone">
+                    <br>
+                    <label for="newPhoto">New Photo:</label>
+                    <input type="file" name="newPhoto" id="newPhoto">
+                    <br>
+                    <button type="submit" name="changer" class="btn btn-primary-custom-beige text-blanc" id="saveButton">Save</button>
+                </div>
+            </form>
+        </div>
+    
+        <div class="card card2">
+            <div class="card-body">
+            <div class="image-container" style="margin-left: 10px;">
+                <img src="{% static 'img/user1.png' %}" alt="Image">
+            </div>
+            <h4 class="text-beige" style="font-size: 40px; margin-right: 25px;">Next Event </h4>
+            <div class="attributesEvent" >
+            <div class="container" style="margin-left: -10px; ">
+                <div class="text-SemiBold" style="margin-top: -11px;">Name:</div><div class="nameEvent" style="margin-left: 5px;">{{nextevent.1}}</div>
+            </div>
+
+            <div class="container" style="margin-left: -10px; margin-top: -10px;">
+                <div class="text-SemiBold" style="margin-top: -11px;">Date:</div><div class="dateEvent" style="margin-left: 5px;">{{nextevent.3}}</div>
+            </div>
+            <div class="container" style="margin-left: -10px; margin-top: -10px;">
+                <div class="text-SemiBold" style="margin-top: -11px;">Hour:</div><div class="hourEvent" style="margin-left: 5px;">{{nextevent.4}}</div>
+            </div>
+            
+            <div class="container" style="margin-left: -10px; margin-top: -10px;">
+                <div class="text-SemiBold" style="margin-top: -11px;">Type:</div><div class="typeEvent" style="margin-left: 5px;">{{team}}</div>
+            </div>
+            <div class="container" style="margin-left: -10px; margin-top: -10px">
+                <div class="text-SemiBold" style="margin-top: -11px;">Description:</div><div class="descEvent break-word" style="margin-left: 5px;"><p>{{nextevent.2}}</p></div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="card card1">
+           <div class="card-body">
+            <div class="attributesApp">
+                <h4 class="text-beige" style="font-size: 30px; margin-right: 25px;">Next Appointment</h4>
+                <div class=" container" style="margin-left: -10px;">
+                    <div class="text-SemiBold" style="margin-top: -11px;">Date:</div><div class="dateApp" style="margin-left: 5px;">{{app.1}}</div>
+                </div>
+                <div class=" container" style="margin-left:-10px; margin-top: -10px;">
+                    <div class="text-SemiBold" style="margin-top: -11px;">Hour:</div><div class="hourApp" style="margin-left: 5px;">{{app.2}}</div>
+                </div>
+                <div class=" container" style="margin-left: -10px; margin-top: -10px;">
+                    <div class="text-SemiBold" style="margin-top: -11px;">Team:</div><div class="teamApp" style="margin-left: 5px;">{{team}} Team</div>
+                </div>
+            </div>
+           </div>
+        </div>
+        <div class="card card2">
+            <div class="card-body">
+                <h4 class="text-beige" style="font-size: 30px; margin-right: 25px;">Latest Events</h4>
+                <table>
+                    {% for e in event %}
+                    <tr>
+                        <td class="nameEvent">{{e.1}}</td>
+                        <td class="dateEvent">{{e.3}}</td>
+                        <td class="hourEvent">{{e.4}}</td>
+                        <td class="typeEvent">{{team}}</td>
+                    </tr>
+                   {% endfor %}
+                </table>
+               </div>
+        </div>
+    </div>
+
+   
+    <script>
+        // Stocker les valeurs initiales s'il y en a, sinon utiliser des valeurs par défaut
+        var initialEmail = document.getElementById('Email_emp') ? document.getElementById('Email_emp').innerText.trim() : 'Default Email';
+        var initialPhone = document.getElementById('Phone_emp') ? document.getElementById('Phone_emp').innerText.trim() : 'Default Phone';
+
+        document.getElementById('editButton').addEventListener('click', function() {
+            document.querySelector('.edit-form').style.display = 'block';
+        });
+
+        document.getElementById('saveButton').addEventListener('click', function() {
+            var newEmail = document.getElementById('newEmail').value.trim();
+            var newPhone = document.getElementById('newPhone').value.trim();
+
+            // Utiliser les valeurs initiales si les champs sont vides ou si les valeurs initiales ne sont pas définies
+            newEmail = newEmail !== '' ? newEmail : initialEmail;
+            newPhone = newPhone !== '' ? newPhone : initialPhone;
+
+            // Mise à jour des données
+            document.getElementById('Email_emp').innerHTML = '<span class="text-SemiBold"></span> ' + newEmail;
+            document.getElementById('Phone_emp').innerHTML = '<span class="text-SemiBold"></span> ' + newPhone;
+
+            // Vous pouvez traiter la nouvelle photo selon vos besoins.
+
+            // Cacher le formulaire après la sauvegarde
+            document.querySelector('.edit-form').style.display = 'none';
+        });
+
+  // Fonction pour déconnecter l'utilisateur
+    function deconnecterUtilisateur() {
+        // Vous pouvez ajouter ici des appels côté serveur pour gérer la déconnexion du serveur
+
+        // Effacer les informations de session stockées localement
+        localStorage.removeItem('nom_utilisateur'); // Remplacez par le nom de votre clé utilisateur
+        localStorage.removeItem('token'); // Remplacez par le nom de votre clé de token ou autre
+
+        // Rediriger vers la page de connexion
+        window.location.href = 'login.html'; // Remplacez par votre URL de page de connexion
+    }
+
+    // Attachez la fonction au clic sur le lien de déconnexion
+    document.querySelector('.deconnexion').addEventListener('click', function (event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien (la navigation vers login.html)
+        deconnecterUtilisateur(); // Appelle la fonction de déconnexion
+    });
+
+    </script>
+
+</body>
+</html>

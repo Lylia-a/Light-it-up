@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,400,400i,600,800" rel="stylesheet"> 
+    <style> 
+    body{
+      background-color: #F3F3F3;
+    }
+      .custom-newsletter.newsletter {
+          position: relative;
+          padding: 80px 0;
+          background-image: url("{% static 'img/accueil.jpg' %}");
+          background-size: cover;
+          background-position: center;
+          width: 100%; /* Ajouter cette ligne */
+          margin-bottom: 0px;
+      }
+  
+      .custom-newsletter.newsletter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur foncée avec une opacité de 0.5 */
+    margin-bottom: -100px;
+}
+
+      .custom-newsletter.newsletter .content {
+          max-width: 650px;
+          margin: 0 auto;
+          text-align: center;
+          position: relative;
+          z-index: 2;
+      }
+  
+      .content-tuned {
+          font-size: 0.8rem;
+          margin-bottom: 34px !important;
+          color: #fff;
+      }
+  
+      h2.custom-newsletter {
+          color: #fff;
+          margin-bottom: 6px;
+      }
+  
+  .form-control {
+          height: 50px;
+          border-color: #ffffff;
+          border-radius: 2px 0px 0px 2px;
+          width: 48%;
+          box-sizing: border-box;
+          display: inline-block;
+          margin-right: 2%;
+      }
+  
+      .input-group {
+          width: 100%;
+      }
+  
+      .form-control:focus {
+          box-shadow: none !important;
+          border: 2px solid #243c4f;
+          border-color: none;
+      }
+  
+      .btn {
+          min-height: 50px; 
+          border-radius:0;
+          background: #AE9775;
+          color: #fff;
+          font-weight:300;
+      }
+  
+     .btn:hover {
+          background: BLACK;
+          color: #AE9775;
+      }
+  
+     .form-control:focus {
+          color: #495057;
+          background-color: #fff;
+          border-color: #80bdff;
+          outline: 0;
+          box-shadow: 0 0 0 0rem rgba(0,123,255,.25) !important;
+      }
+  
+      #userMessage {
+          margin-right: 0;
+      }
+
+/* ==========================================
+    FOR DEMO PURPOSE
+  ========================================== */
+
+.footer-custom.text-small {
+  font-size: 0.9rem;
+}
+
+.footer-custom a{
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+  color: white;
+}
+
+.footer-custom.form-control {
+  background: #212529;
+  border-color: #545454;
+}
+
+.footer-custom.form-control:focus {
+  background: #212529;
+}
+
+footer.footer-custom {
+  background: rgba(6, 4, 3, 0.98);
+ 
+}
+
+hr{
+  width: 90%;
+  margin: 10px auto;
+  background: #AE9775;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+margin-bottom: 30px;
+}
+
+/* Ajoutez cette section à votre feuille de style CSS */
+
+ul.list-unstyled.text-muted li {
+    margin-bottom: 10px; /* Ajoutez la marge souhaitée entre les éléments li */
+}
+
+
+ul.horizontal-list {
+  text-align: center;
+            list-style: none;
+            padding: 0;
+            margin-left: 150px;
+            display: flex;
+             /* Ajustez cela selon votre préférence */
+        }
+
+        ul.horizontal-list li {
+          margin-left: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .card-container {
+      display: flex;
+      flex-wrap: wrap; /* Permet à la ligne de continuer sur la suivante si nécessaire */
+      justify-content: space-between; /* Distribue l'espace entre les cartes */
+      margin: 20px 0; /* Marge entre les lignes de cartes */
+    }
+
+    .card {
+      flex: 0 0 30%; /* Chaque carte doit occuper environ un tiers de la largeur */
+      margin-bottom: 20px; /* Marge entre les cartes */
+      background-color: white;
+      border-radius: 0px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .t1{
+      color: #000;
+font-family: "Open Sans";
+font-size: 25px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+    }
+
+    .t2{
+      color: #000;
+text-align: center;
+font-family: "Open Sans";
+font-size: 13px;
+font-style: normal;
+font-weight: 200;
+line-height: normal;
+    }
+/* ==========================================
+    CUSTOM UTILS CLASSES
+  ========================================== */
+  </style>
+  
+    </head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid" >
+      <a class="navbar-brand me-auto" href="#"> <img src="{% static 'img/logo.png' %}" alt="Logo" width="160" height="60" class="float-start" >
+      </a>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="{% static 'img/logo.png' %}" alt="Logo" width="165" height="25" class="float-start" ></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav flex-grow-1 pe-3 liste">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/home/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/projects/">Projects </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/howitworks/">How it works </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contactus">Contact </a>
+                <li class="nav-item">
+              <a class="nav-link" href="/login/">Login </a>
+            </li>
+              </li>
+          </ul>
+        </div>
+      </div>
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 custom-margin-left">
+        <li class="nav-item">
+      <a href="/login/" class="nav-link"><img src="{% static 'img/contact icon.svg' %}" width="27px" height="27px" ></a>
+      </li>
+      <li class="nav-item">
+      <a href="#" class="nav-link"><img src="{% static  'img/search icon.svg' %}" width="31px" height="31px"></a>
+      </li>
+     </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+      <div class="position-relative">
+        <div class="jumbotron text-center position-absolute top-50 start-50 translate-middle custom-jumbotron">
+           <p class="display-4 text-beige "><b>INTERIOR DESIGN</b></p>
+            <p class="display-4  text-blanc "><b>STUDIO</b></p>
+            <footer class="lead text-blanc">Creators of unique spaces, where every detail becomes a work of art. Transform your event </br>
+into a visual story that reflects your style and awakens the senses.</footer>  
+<div class="flex-d flex-wrap boutonsacc">
+  <a href="#contactus"><button type="button" class="btn-light btn-outline custom-btn-transparent text-blanc text-center" >More info <img src="{% static  'img/Right Arrow.svg' %}" ></button></a>
+  <a href="/howitworks/" ><button type="button"  class="btn-light btn-outline custom-btn-transparent1 text-blanc text-center" >Book Now</button></a> 
+          </div>
+          </div>
+          <img src="{% static  'img/accueil1.png' %}" class="img-fluid" alt="Accueil Image">
+        </div>
+    </div>
+
+<div class="container-fluid">
+    <div class="text2">
+    <b class="text-beige">Creative Solutions</b>
+    </br>
+   <b class="text-noir">by Professional Designers</b>
+   <footer class="lead text-noir">Explore a curated collection of our most captivating projects, serving as a wellspring of</br> ideas for your next festive event. Let our innovative designs spark your imagination,</br>
+    guiding you towards a world of limitless possibilities in event decoration.</footer>
+</div>
+
+<div class="container-fluid-acc2 list-group-horizontal">
+    <ul class="list-unstyled d-flex  ">
+  <li class="me-3">  <img src="{% static 'img/accueil21.png' %}" class="accueil2 " alt="..."></li>
+   <li class="me-3"> <img src="{% static 'img/accueil22.png' %}" class="accueil2 " alt="..."></li>
+   <li class="me-3"> <img src="{% static 'img/accueil23.png' %}" class="accueil2 " alt="..."></li>
+   <li class="ms-auto-3"> <img src="{% static 'img/accueil3.png' %}" class="accueil3 " alt="...">
+  <img src=""></li>
+   <li class="ms-auto-3"></li>
+</ul>
+<button type="button" class="btn-light btn-outline custom-btn-transparent-noir text-noir text-center">Book <img src="{% static 'img/Right Arrow Black.svg' %}" class="flechenoire" /></button>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-6 text2">
+          <b class="text-beige">Modern ideas</b></br>
+          <b class="text-noir">for your events</b>
+          <footer class="lead text-noir" style="font-size:18px;">Let us bring your vision to life and make your next celebration truly extraordinary. From intimate gatherings to grand celebrations, we ensure that every moment is adorned with sophistication and flair.</footer>
+          <button type="button" class="btn-light btn-outline custom-btn-noir text-blanc text-center">Book <img src="{% static 'img/Right Arrow.svg' %}" class="flechenoire"/></button>
+      </div>
+      <div class="col-md-3" style="margin-top: 80px;">
+        <div class="card" style="text-align: center;" >
+         <ul class="list-unstyled">
+          <li><img src="{% static 'img/Party Balloon.png'%}"style="transform:scaleX(-1);margin-top:20px">
+          <img src="{% static 'img/Party Balloon.png' %}" style="margin-left: 60px;margin-top: -150px;" ></li>
+          <li class="t1">Anniversary</li>
+          <br/>
+          <li class="t2">Call us to organize an unforgettable birthday celebration</li>
+         </ul>
+        </div>
+        
+        <!-- Répétez pour d'autres cartes -->
+      </div>
+  </div>
+</div>
+</div>
+<div class="card-container">
+  <div class="col-md-3" style="margin: 10px; margin-left: 40px;" >
+    <div class="card" style="text-align: center;">
+      <ul class="list-unstyled">
+        <li><img src="{% static 'img/Baby Stroller.png' %}"></li>
+        <li class="t1">Baby Shower</li>
+        <br/>
+        <li class="t2">We can help you getting the best babyshower party ever</li>
+       </ul>
+    </div>
+    
+  </div>
+  <div class="col-md-3" style="margin: 10px;" >
+    <div class="card" style="text-align: center;">
+      <ul class="list-unstyled">
+        <li><img src="{% static 'img/Graduation Cap.png' %}" style="margin-top: -10px;"></li>
+        <li class="t1">Graduation</li>
+        <br/>
+        <li class="t2">Trust us to make your graduation party a real success</li>
+       </ul>
+    </div>
+   
+  </div>
+  <div class="col-md-3" style="margin: 10px; margin-right: 40px;">
+    <div class="card" style="text-align: center;">
+      <ul class="list-unstyled">
+        <li><img src="{% static 'img/Wedding Rings.png' %}"></li>
+        <li class="t1">Wedding</li>
+        <br/>
+        <li class="t2">Let us make your wedding an unforgettable event</li>
+       </ul>
+    </div>
+  </div>
+</div>
+<div class="newsletter custom-newsletter" id="contactus">
+              <div class="content">
+                  <h2 class="text-beige" style="font-size: 40px;">Contact Us</h2>
+                  <h6 class="content-tuned">Feel free to reach out to us if you have any questions or concerns </h6>
+                  <div class="input-group">
+                      <input type="email" id="userEmail" class="form-control" placeholder="Your Email">
+                      <input type="text" id="userMessage" class="form-control" placeholder="Write Your Message.." oninput="adjustWidthAndEmail(this)">
+                      <span class="input-group-btn">
+                          <button class="btn" type="submit" onclick="sendMessage()">Send your message</button>
+                      </span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="d-flex flex-column h-100">
+            <!-- FOOTER -->
+            <footer class="w-100 py-4 flex-shrink-0 footer-custom">
+                <div class="container py-4">
+                  <hr>
+                    <div class="row gy-4 gx-5">
+                        <div class="col-lg-4 col-md-6">
+                           <img src="{% static 'img/logo.png' %}" style="width: 150px;
+                           height: 45px;
+                           flex-shrink: 0;
+                           margin-bottom: 10px;">
+                            <p class=" text-muted" style="font-size:12px;">
+                              From intimate gatherings to grand celebrations, we ensure that 
+                              every moment is adorned with sophistication and flair. intimate 
+                              gatherings to grand celebrations, we ensure that 
+                              every moment is adorned with sophistication and flair.</p>
+                        </div>
+                        <div class="col-lg-2 col-md-6">
+                            <h5 class="text-beige mb-3">Explore</h5>
+                            <ul class="list-unstyled text-muted">
+                                <li><i class="bi bi-chevron-right" style="color: #AE9775;"></i><a href="#">Home</a></li>
+                                <li><i class="bi bi-chevron-right" style="color: #AE9775;"></i><a href="#">About Us</a></li>
+                                <li><i class="bi bi-chevron-right" style="color: #AE9775;"></i><a href="#">Our Portfolio</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-md-6">
+                          <div class="marge" style="margin-bottom: 40px;"></div>
+                            <ul class="list-unstyled text-muted">
+                                <li><i class="bi bi-chevron-right" style="color: #AE9775;"></i><a href="#">Home</a></li>
+                                <li><i class="bi bi-chevron-right" style="color: #AE9775;"></i><a href="#">About</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                           <!--On va mettre les logos ici-->
+                           
+    <ul class="horizontal-list">
+      <li><i class="bi bi-twitter-x" style="color:#AE9775;"></i></li>
+      <li><i class="bi bi-instagram" style="color: #AE9775;"></i></li>
+      <li><i class="bi bi-facebook" style="color: #AE9775;"></i></li>
+      <li><i class="bi bi-linkedin" style="color: #AE9775;"></i></li>
+  </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+          
+
+<script>
+  function adjustWidthAndEmail(element) {
+      element.style.width = ((element.value.length + 1) * 8) + 'px';
+  }
+  function sendMessage() {
+    var userEmail = document.getElementById("userEmail").value;
+    var userMessage = document.getElementById("userMessage").value;
+
+    // Envoyer l'e-mail et le message au serveur
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "send_message.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Traiter la réponse du serveur (optionnel)
+            var response = JSON.parse(xhr.responseText);
+            if (response.status === "success") {
+                console.log("E-mail envoyé avec succès!");
+
+                // Réinitialiser le formulaire
+                document.getElementById("userEmail").value = "";
+                document.getElementById("userMessage").value = "";
+            } else {
+                console.error("Erreur lors de l'envoi de l'e-mail.");
+            }
+        }
+    };
+    // Envoyer les données au serveur
+    xhr.send("email=" + encodeURIComponent(userEmail) + "&message=" + encodeURIComponent(userMessage));
+}
+
+</script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
